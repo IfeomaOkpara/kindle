@@ -1,3 +1,5 @@
+"use client";
+
 import ContactUs from "./contactUs";
 import Image from "next/legacy/image";
 import Header from "@/components/Header";
@@ -6,8 +8,32 @@ import instagramIcon from "../../public/instagram.svg";
 import twitterIcon from "../../public/twitter.svg";
 import CloserToFooter from "@/components/CloserToFooter";
 import Footer from "@/components/Footer";
+import { useFormik } from "formik";
+import { contactSchema } from "@/components/schema";
+
 
 export default function Page() {
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    number: "",
+    message: "",
+  };
+
+  // const onSubmit = () => {
+  //   console.log(hello);
+  // };
+  const { values, handleBlur, handleChange, handleSubmit, errors, touched, isSubmitting} =
+    useFormik({
+      initialValues,
+      validationSchema: contactSchema,
+      onSubmit: (values, actions) => {
+        console.log(values);
+        actions.resetForm()
+      },
+    });
+  console.log(errors);
   return (
     <section className="overflow-hidden">
       <div className="w-full h-[113px] fixed top-0 z-50 flex items-center justify-center">
@@ -68,41 +94,60 @@ export default function Page() {
             SEND A MESSAGE
           </h1>
 
-          <form className="w-full  flex flex-col gap-8 mt-10">
+          <form
+            className="w-full  flex flex-col gap-8 mt-10"
+            onSubmit={handleSubmit}
+          >
             <div className="flex items-center  gap-10 w-full">
               <div className=" w-full gap-2 flex flex-col">
                 <label
-                  htmlFor="email"
+                  htmlFor="firstName"
                   className="text-[20px] font-bold text-[#1E1E1E]"
                 >
-                  Name
+                  First Name
                 </label>
                 <input
                   type="text"
-                  id="name-text"
-                  name="text"
-                  required
+                  id="firstName"
+                  name="firstName"
+                  value={values.firstName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   placeholder=""
-                  className="border border-[#A3A3A3] rounded-[10px] px-2 py-2  w-full outline-none"
+                  className="border border-[#A3A3A3] rounded-[10px] px-2 py-2 
+                    w-full outline-none"
                 />
-                <span className="text-[20px] text-[#5F5F5F]">First Name</span>
+                {/* {<p className="error">{errors.email}</p>} */}
+                {/* {`border border-[#A3A3A3] rounded-[10px] px-2 py-2 
+                   w-full outline-none input-error ${errors.firstName.length > 0 ? "input-error" : " "}`} */}
+                <div>
+                  {errors.firstName && touched.firstName && (
+                    <p className="error">{errors.firstName}</p>
+                  )}
+                </div>
               </div>
               <div className=" flex flex-col gap-2 w-full">
                 <label
-                  htmlFor="email"
+                  htmlFor="lastName"
                   className="text-[20px] font-bold text-[#1E1E1E]"
                 >
                   Last Name
                 </label>
                 <input
                   type="text"
-                  id="name-text"
-                  name="text"
-                  required
+                  id="lastName"
+                  name="lastName"
+                  value={values.lastName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   placeholder=""
                   className="border border-[#A3A3A3] rounded-[10px] px-2 py-2  w-full outline-none"
                 />
-                <span className="text-[20px] text-[#5F5F5F]">Last Name</span>
+                <div>
+                  {errors.lastName && touched.lastName && (
+                    <p className="error">{errors.lastName}</p>
+                  )}
+                </div>
               </div>
             </div>
             <div className="flex items-center  gap-10 w-full">
@@ -117,17 +162,21 @@ export default function Page() {
                   type="email"
                   id="email"
                   name="email"
-                  required
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   placeholder=""
                   className="border border-[#A3A3A3] rounded-[10px] px-2 py-2  w-full outline-none"
                 />
-                <span className="text-[20px] text-[#5F5F5F]">
-                  example@example.com
-                </span>
+                <div>
+                  {errors.email && touched.email && (
+                    <p className="error">{errors.email}</p>
+                  )}
+                </div>
               </div>
               <div className="flex flex-col gap-2 w-full">
                 <label
-                  htmlFor="email"
+                  htmlFor="phone"
                   className="text-[20px] font-bold text-[#1E1E1E]"
                 >
                   PHONE NUMBER
@@ -135,19 +184,23 @@ export default function Page() {
                 <input
                   type="text"
                   id="number"
-                  name="text"
-                  required
+                  name="number"
+                  value={values.number}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   placeholder=""
                   className="border border-[#A3A3A3] rounded-[10px] px-2 py-2  w-full outline-none"
                 />
-                <span className="text-[20px] text-[#5F5F5F]">
-                  Please enter a valid phone number
-                </span>
+                <div>
+                  {errors.number && touched.number && (
+                    <p className="error">{errors.number}</p>
+                  )}
+                </div>
               </div>
             </div>
             <div className=" w-[70%] mx-auto ">
               <label
-                htmlFor="email"
+                htmlFor="message"
                 className="text-[20px] font-bold text-[#1E1E1E]"
               >
                 MESSAGE
@@ -155,15 +208,25 @@ export default function Page() {
               <textarea
                 id="message"
                 name="message"
+                value={values.message}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 rows="4"
                 className="resize-none border border-[#A3A3A3] rounded-[10px] px-2 py-2 w-full outline-none mt-10px h-[200px]"
                 cols="80"
               ></textarea>
+              <div>
+                {errors.message && touched.message && (
+                  <p className="error">{errors.message}</p>
+                )}
+              </div>
 
               <div className="flex justify-end mt-6">
                 <button
                   type="submit"
-                  className="w-[169px] bg-[#14BDE3] rounded-[56px] pt-[16px] pr-[56px] pb-[16px] pl-[56px] text-[20px] block  font-medium text-[#1E1E1E]"
+                  disabled={isSubmitting}
+                  className="w-[169px] bg-[#14BDE3] rounded-[56px] pt-[16px] pr-[56px] pb-[16px] pl-[56px] text-[20px] block
+                    font-medium text-[#1E1E1E] hover:bg-[#39494d] hover:text-white"
                 >
                   Send
                 </button>
