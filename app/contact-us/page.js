@@ -10,7 +10,8 @@ import CloserToFooter from "@/components/CloserToFooter";
 import Footer from "@/components/Footer";
 import { useFormik } from "formik";
 import { contactSchema } from "@/components/schema";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Page() {
   const initialValues = {
@@ -24,16 +25,32 @@ export default function Page() {
   // const onSubmit = () => {
   //   console.log(hello);
   // };
-  const { values, handleBlur, handleChange, handleSubmit, errors, touched, isSubmitting} =
-    useFormik({
-      initialValues,
-      validationSchema: contactSchema,
-      onSubmit: (values, actions) => {
-        console.log(values);
-        actions.resetForm()
-      },
-    });
-  console.log(errors);
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    isSubmitting,
+  } = useFormik({
+    initialValues,
+    validationSchema: contactSchema,
+    onSubmit: (values, actions) => {
+      console.log(values);
+      actions.resetForm();
+      toast.success("❤️form summitted successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    },
+  });
+  // console.log(errors);
   return (
     <section className="overflow-hidden">
       <div className="w-full h-[113px] fixed top-0 z-50 flex items-center justify-center">
@@ -235,6 +252,7 @@ export default function Page() {
           </form>
         </div>
       </section>
+      <ToastContainer />
       <CloserToFooter />
       <Footer />
     </section>
