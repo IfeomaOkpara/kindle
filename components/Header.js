@@ -28,7 +28,7 @@ function Header() {
         <Link href="/news">News</Link>
         <div>Blog</div>
         <Link href="/contact-us">
-          <div>Contact Us</div>
+          Contact Us
         </Link>
 
         <div
@@ -44,10 +44,11 @@ function Header() {
           {isDropdownOpen && (
             <div className="absolute left-0 top-full mt-1 w-[213px] rounded-[5px] border border-purple-500 bg-gray-800 z-10">
               <div className="px-5 py-2.5 m-2 border border-white rounded-[36px] flex items-center">
-                <Link href="/involved"></Link>
+                <Link href="/involved">
                 <div className="text-white text-base font-bold leading-7">
                   GET INVOLVED
                 </div>
+                </Link>
               </div>
 
               <div className="px-5 py-2.5 m-2 bg-cyan-500 rounded-[10px] flex items-center">

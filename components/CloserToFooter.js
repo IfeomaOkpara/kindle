@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 function CloserToFooter() {
   return (
     <section>
@@ -15,18 +15,19 @@ function CloserToFooter() {
             urna. Nunc viverra imperdiet enim. Fusce est.
           </div>
           <div className="px-14 py-4  bg-cyan-500 rounded-[56px] mt-11 inline-block">
-            <div className="text-stone-900 text-[25px] font-bold font-['Calibri'] leading-7">
-              GET INVOLVED
-            </div>
+            <Link href="/involved">
+              <div className="text-stone-900 text-[25px] font-bold font-['Calibri'] leading-7">
+                GET INVOLVED
+              </div>
+            </Link>
           </div>
         </div>
-        
-          <img
-            className="w-[326px] h-[326px] -mr-[134px] mt-4 -rotate-2"
-            src="/asset-61.svg"
-            alt="Placeholder"
-          />
-        
+
+        <img
+          className="w-[326px] h-[326px] -mr-[134px] mt-4 -rotate-2"
+          src="/asset-61.svg"
+          alt="Placeholder"
+        />
       </div>
     </section>
   );

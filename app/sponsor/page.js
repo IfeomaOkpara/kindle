@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import CloserToFooter from "@/components/CloserToFooter";
 import Footer from "@/components/Footer";
-
+import Link from "next/link";
 import Sponsor from "./sponsor";
 import Button from "@/components/apply-button";
 import Sponsors from "@/components/OurSpon";
@@ -37,11 +37,12 @@ export default function page() {
             urna. Nunc viverra
           </p>
         </div>
-
-        <Button />
+        <Link href="/sponsorForm">
+          <Button />
+        </Link>
       </section>
 
-     <Sponsors/>
+      <Sponsors />
 
       <CloserToFooter />
       <Footer />
